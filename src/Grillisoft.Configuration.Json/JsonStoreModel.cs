@@ -1,5 +1,6 @@
 using System.Collections.Generic;
-namespace src.Grillisoft.Configuration.Json
+
+namespace Grillisoft.Configuration.Json
 {
     public class JsonStoreModel
     {

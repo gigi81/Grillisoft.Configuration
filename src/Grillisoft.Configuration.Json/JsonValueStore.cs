@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.IO;
+using System.Threading.Tasks;
 using Grillisoft.Configuration.Stores;
 
 namespace Grillisoft.Configuration.Json
@@ -24,5 +25,14 @@ namespace Grillisoft.Configuration.Json
             return _store.TryGetValue(key, out value);
         }
 
+        public static async Task<JsonValueStore> Load(string filename)
+        {
+            return await Load(new FileInfo(filename));
+        }
+
+        public static async Task<JsonValueStore> Load(FileInfo file)
+        {
+            return new JsonValueStore(await JsonValueStoreReader.Load(file));
+        }
     }
 }
