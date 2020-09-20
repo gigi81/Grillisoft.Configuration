@@ -20,6 +20,8 @@ namespace Grillisoft.Configuration.Stores
 
         public bool IsSafe => true;
 
+        public bool IsRoot => _store.IsRoot;
+
         public bool TryGetValue(string key, out string value)
         {
             _keys.Add(key);

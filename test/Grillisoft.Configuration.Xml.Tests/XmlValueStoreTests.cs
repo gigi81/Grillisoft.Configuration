@@ -10,34 +10,40 @@ namespace Grillisoft.Configuration.Xml.Tests
         [Fact]
         public void LoadRoot()
         {
-            var root = XmlValueStore.Load(Path.Combine(AssemblyDirectory, "Data", "Root.xml")).Result;
+            var store = XmlValueStore.Load(Path.Combine(AssemblyDirectory, "Data", "Root.xml")).Result;
 
-            Assert.Equal("example value", root.Get("key01"));
-            Assert.Equal("example value", root.Get("key02"));
-            Assert.Equal("example value", root.Get("key03"));
-            Assert.Equal("example value", root.Get("key04"));
+            Assert.Equal("example value", store.Get("key01"));
+            Assert.Equal("example value", store.Get("key02"));
+            Assert.Equal("example value", store.Get("key03"));
+            Assert.Equal("example value", store.Get("key04"));
+
+            Assert.True(store.IsRoot);
         }
 
         [Fact]
         public void LoadChild01()
         {
-            var root = XmlValueStore.Load(Path.Combine(AssemblyDirectory, "Data", "Child01.xml")).Result;
+            var store = XmlValueStore.Load(Path.Combine(AssemblyDirectory, "Data", "Child01.xml")).Result;
 
-            Assert.Equal("example value override", root.Get("key01"));
-            Assert.Equal("example value", root.Get("key02"));
-            Assert.Equal("example value", root.Get("key03"));
-            Assert.Equal("example value", root.Get("key04"));
+            Assert.Equal("example value override", store.Get("key01"));
+            Assert.Equal("example value", store.Get("key02"));
+            Assert.Equal("example value", store.Get("key03"));
+            Assert.Equal("example value", store.Get("key04"));
+
+            Assert.False(store.IsRoot);
         }
 
         [Fact]
         public void LoadChild02_WithParse()
         {
-            var root = XmlValueStore.Load(Path.Combine(AssemblyDirectory, "Data", "Child02_WithParse.xml")).Result;
+            var store = XmlValueStore.Load(Path.Combine(AssemblyDirectory, "Data", "Child02_WithParse.xml")).Result;
 
-            Assert.Equal("example value override", root.Get("key01"));
-            Assert.Equal("example value", root.Get("key02"));
-            Assert.Equal("example value", root.Get("key03"));
-            Assert.Equal("example value", root.Get("key04"));
+            Assert.Equal("example value override", store.Get("key01"));
+            Assert.Equal("example value", store.Get("key02"));
+            Assert.Equal("example value", store.Get("key03"));
+            Assert.Equal("example value", store.Get("key04"));
+
+            Assert.False(store.IsRoot);
         }
 
         private static string AssemblyDirectory

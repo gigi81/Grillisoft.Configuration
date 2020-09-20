@@ -10,12 +10,27 @@ namespace Grillisoft.Configuration.Json.Tests
         [Fact]
         public void LoadRoot()
         {
-            var root = JsonValueStore.Load(Path.Combine(AssemblyDirectory, "Data", "root.json")).Result;
+            var store = JsonValueStore.Load(Path.Combine(AssemblyDirectory, "Data", "root.json")).Result;
 
-            Assert.Equal("example value", root.Get("key01"));
-            Assert.Equal("example value", root.Get("key02"));
-            Assert.Equal("example value", root.Get("key03"));
-            Assert.Equal("example value", root.Get("key04"));
+            Assert.Equal("example value", store.Get("key01"));
+            Assert.Equal("example value", store.Get("key02"));
+            Assert.Equal("example value", store.Get("key03"));
+            Assert.Equal("example value", store.Get("key04"));
+
+            Assert.True(store.IsRoot);
+        }
+
+        [Fact]
+        public void LoadChild01()
+        {
+            var store = JsonValueStore.Load(Path.Combine(AssemblyDirectory, "Data", "child01.json")).Result;
+
+            Assert.Equal("example value override", store.Get("key01"));
+            Assert.Equal("example value", store.Get("key02"));
+            Assert.Equal("example value", store.Get("key03"));
+            Assert.Equal("example value", store.Get("key04"));
+
+            Assert.False(store.IsRoot);
         }
 
         private static string AssemblyDirectory

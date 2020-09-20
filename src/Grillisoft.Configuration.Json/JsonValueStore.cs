@@ -20,6 +20,8 @@ namespace Grillisoft.Configuration.Json
 
         public bool IsSafe => false;
 
+        public bool IsRoot => _store.IsRoot;
+
         public bool TryGetValue(string key, out string value)
         {
             return _store.TryGetValue(key, out value);

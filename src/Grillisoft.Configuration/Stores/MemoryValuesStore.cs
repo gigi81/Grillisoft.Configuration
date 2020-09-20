@@ -23,6 +23,8 @@ namespace Grillisoft.Configuration.Stores
 
         public bool IsSafe => false;
 
+        public bool IsRoot => _parent == null;
+
         public bool TryGetValue(string key, out string value)
         {
             if (!TryGetValueInternal(key, out value))
