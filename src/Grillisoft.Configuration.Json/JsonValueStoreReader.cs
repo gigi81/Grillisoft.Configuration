@@ -6,25 +6,25 @@ using Grillisoft.Configuration.Stores;
 
 namespace Grillisoft.Configuration.Json
 {
-    public class JsonValueStoreReader
+    public class JsonValueStoreReader : IValuesStoreReader
     {
-        public static async Task<MemoryValuesStore> Load(FileInfo file)
+        public async Task<IValuesStore> Load(string folder, string name)
         {
-            using (var stream = file.OpenRead())
+            using (var stream = File.OpenRead(Path.Combine(folder, name + ".json")))
             {
                 var model = await JsonSerializer.DeserializeAsync<JsonStoreModel>(stream, Options);
-                var parent = await LoadParent(file.Directory.FullName, model.Parent);
+                var parent = await LoadParent(folder, model.Parent);
 
                 return new MemoryValuesStore(model.Keys, parent);
             }
         }
 
-        private static async Task<MemoryValuesStore> LoadParent(string folder, string name)
+        private async Task<IValuesStore> LoadParent(string folder, string name)
         {
             if (String.IsNullOrWhiteSpace(name))
                 return null;
 
-            return await Load(new FileInfo(Path.Combine(folder, name + ".json")));
+            return await this.Load(folder, name);
         }
 
         private static readonly JsonSerializerOptions Options = new JsonSerializerOptions

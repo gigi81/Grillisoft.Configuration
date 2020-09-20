@@ -7,18 +7,18 @@ using System.Xml;
 
 namespace Grillisoft.Configuration.Xml
 {
-    internal static class XmlValueStoreReader
+    public class XmlValueStoreReader : IValuesStoreReader
     {
-        public static async Task<MemoryValuesStore> Load(FileInfo file)
+        public async Task<IValuesStore> Load(string folder, string name)
         {
-            using (var stream = file.OpenRead())
+            using (var stream = File.OpenRead(Path.Combine(folder, name + ".xml")))
             using (var reader = XmlReader.Create(stream, Settings))
             {
-                return await LoadInternal(reader, file.Directory.FullName);
+                return await LoadInternal(reader, folder);
             }
         }
 
-        private static async Task<MemoryValuesStore> LoadInternal(XmlReader reader, string folder)
+        private async Task<MemoryValuesStore> LoadInternal(XmlReader reader, string folder)
         {
             while (await reader.ReadAsync())
             {
@@ -28,7 +28,7 @@ namespace Grillisoft.Configuration.Xml
                         if (!reader.Name.Equals("keys", StringComparison.InvariantCultureIgnoreCase))
                             break;
 
-                        var parent = await LoadParent(folder, reader.GetAttribute("parent"));
+                        var parent = await this.LoadParent(folder, reader.GetAttribute("parent"));
                         var values = await LoadKeys(reader.ReadSubtree());
 
                         return new MemoryValuesStore(values, parent);
@@ -38,12 +38,12 @@ namespace Grillisoft.Configuration.Xml
             throw new Exception("Root 'keys' element not found");
         }
 
-        private static async Task<MemoryValuesStore> LoadParent(string folder, string name)
+        private async Task<IValuesStore> LoadParent(string folder, string name)
         {
             if (String.IsNullOrWhiteSpace(name))
                 return null;
 
-            return await Load(new FileInfo(Path.Combine(folder, name + ".xml")));
+            return await this.Load(folder, name);
         }
 
         private static async Task<Dictionary<string, string>> LoadKeys(XmlReader reader)
