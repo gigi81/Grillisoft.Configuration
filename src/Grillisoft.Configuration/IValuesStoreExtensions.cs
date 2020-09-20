@@ -6,7 +6,7 @@ namespace Grillisoft.Configuration
     {
         public static string Get(this IValuesStore store, string key)
         {
-            return store.TryGetValue(key, out var ret) ? ret : throw new KeyNotFoundException($"Key {key} not found");
+            return store.TryGetValue(key, out var ret) ? ret : throw new KeyNotFoundException($"Key '{key}' not found");
         }
 
         public static int GetInt32(this IValuesStore store, string key)

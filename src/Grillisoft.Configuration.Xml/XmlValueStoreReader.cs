@@ -57,11 +57,13 @@ namespace Grillisoft.Configuration.Xml
                 switch (reader.NodeType)
                 {
                     case XmlNodeType.Element:
+                        if (reader.Name.Equals("keys", StringComparison.InvariantCultureIgnoreCase))
+                            break;
+
                         if (!reader.Name.Equals("key", StringComparison.InvariantCultureIgnoreCase))
                             throw new Exception($"Invalid element '{reader.Name}'");
 
-                        key = reader.GetAttribute("key");
-                        
+                        key = reader.GetAttribute("name");
                         break;
 
                     case XmlNodeType.Text:
@@ -69,6 +71,9 @@ namespace Grillisoft.Configuration.Xml
                         break;
 
                     case XmlNodeType.EndElement:
+                        if (reader.Name.Equals("keys", StringComparison.InvariantCultureIgnoreCase))
+                            break;
+
                         if (!reader.Name.Equals("key", StringComparison.InvariantCultureIgnoreCase))
                             throw new Exception($"Invalid element '{reader.Name}'");
 

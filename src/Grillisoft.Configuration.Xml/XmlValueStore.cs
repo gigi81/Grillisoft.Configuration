@@ -23,7 +23,7 @@ namespace Grillisoft.Configuration.Xml
 
         public bool TryGetValue(string key, out string value)
         {
-            throw new NotImplementedException();
+            return _store.TryGetValue(key, out value);
         }
 
         public static async Task<XmlValueStore> Load(string filename)

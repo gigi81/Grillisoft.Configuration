@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<keys parent="Root">
+  <key name="key01">${key02} override</key>
+</keys>
