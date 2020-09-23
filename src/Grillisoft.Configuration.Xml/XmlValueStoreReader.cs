@@ -9,20 +9,41 @@ namespace Grillisoft.Configuration.Xml
 {
     public class XmlValueStoreReader : IValueStoreReader
     {
-        public async Task<IValueStore> Load(string folder, string name)
+        public async Task<IValueStore> Load(string folder, IEnumerable<string> keys)
+        {
+            var missing = new List<string>();
+
+            foreach (var key in keys)
+            {
+                var file = GetFile(folder, key);
+                if (file.Exists)
+                    return await LoadFile(file);
+
+                missing.Add(key);
+            }
+
+            throw new FileNotFoundException($"Keys '{String.Join(", ", missing)}' could not be found in '{folder}'");
+        }
+
+        private static FileInfo GetFile(string folder, string key)
+        {
+            return new FileInfo(Path.Combine(folder, key + ".xml"));
+        }
+
+        private async Task<IValueStore> LoadFile(FileInfo file)
         {
             //https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/using-async-for-file-access
-            using (var stream = new FileStream(Path.Combine(folder, name + ".xml"), FileMode.Open, FileAccess.Read, FileShare.Read, 4096, useAsync: true))
+            using (var stream = new FileStream(file.FullName, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, useAsync: true))
             using (var reader = XmlReader.Create(stream, Settings))
             {
-                var data = await LoadInternal(reader, folder);
-                var parent = await LoadParent(folder, data.Item2);
+                var data = await LoadKeys(reader);
+                var parent = await LoadParent(file.DirectoryName, data.Item2);
 
                 return new MemoryValueStore(data.Item1, parent);
             }
         }
 
-        private async Task<(IDictionary<string, string>, string)> LoadInternal(XmlReader reader, string folder)
+        private async Task<(IDictionary<string, string>, string)> LoadKeys(XmlReader reader)
         {
             while (await reader.ReadAsync())
             {
@@ -33,7 +54,7 @@ namespace Grillisoft.Configuration.Xml
                             break;
 
                         var parent = reader.GetAttribute("parent");
-                        var values = await LoadKeys(reader.ReadSubtree());
+                        var values = await LoadKeysSubTree(reader.ReadSubtree());
 
                         return (values, parent);
                 }
@@ -42,15 +63,15 @@ namespace Grillisoft.Configuration.Xml
             throw new Exception("Root 'keys' element not found");
         }
 
-        private async Task<IValueStore> LoadParent(string folder, string name)
+        private async Task<IValueStore> LoadParent(string folder, string key)
         {
-            if (String.IsNullOrWhiteSpace(name))
+            if (String.IsNullOrWhiteSpace(key))
                 return null;
 
-            return await this.Load(folder, name);
+            return await this.LoadFile(GetFile(folder, key));
         }
 
-        private static async Task<Dictionary<string, string>> LoadKeys(XmlReader reader)
+        private static async Task<Dictionary<string, string>> LoadKeysSubTree(XmlReader reader)
         {
             var values = new Dictionary<string, string>();
             string key = null;

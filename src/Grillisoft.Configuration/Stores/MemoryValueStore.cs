@@ -3,7 +3,7 @@ using Grillisoft.Configuration.Parsers;
 
 namespace Grillisoft.Configuration.Stores
 {
-    public class MemoryValueStore : IValueStoreWritable
+    public class MemoryValueStore : IValueStore
     {
         private readonly Dictionary<string, string> _values;
         private readonly IValueParser _parser;
@@ -48,10 +48,6 @@ namespace Grillisoft.Configuration.Stores
         public void Set(string key, string value)
         {
             _values[key] = value;
-        }
-
-        public void Save()
-        {
         }
     }
 }
