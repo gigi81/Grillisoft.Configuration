@@ -10,12 +10,18 @@ namespace Grillisoft.Configuration.Json
     {
         public async Task<IValuesStore> Load(string folder, string name)
         {
-            using (var stream = File.OpenRead(Path.Combine(folder, name + ".json")))
-            {
-                var model = await JsonSerializer.DeserializeAsync<JsonStoreModel>(stream, Options);
-                var parent = await LoadParent(folder, model.Parent);
+            var model = await LoadInternal(Path.Combine(folder, name + ".json"));
+            var parent = await LoadParent(folder, model.Parent);
 
-                return new MemoryValuesStore(model.Keys, parent);
+            return new MemoryValuesStore(model.Keys, parent);
+        }
+
+        private async Task<JsonStoreModel> LoadInternal(string path)
+        {
+            //https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/using-async-for-file-access
+            using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, useAsync: true))
+            {
+                return await JsonSerializer.DeserializeAsync<JsonStoreModel>(stream, Options);
             }
         }
 

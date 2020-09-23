@@ -17,8 +17,8 @@ namespace Grillisoft.Configuration.Stores
         public MemoryValuesStore(IDictionary<string, string> source, IValuesStore parent = null, IValueParser parser = null)
         {
             _values = source != null ? new Dictionary<string, string>(source) : new Dictionary<string, string>();
-            _parser = parser ?? RegexValueParser.Default;
             _parent = parent;
+            _parser = parser ?? RegexValueParser.Default;
         }
 
         public bool IsSafe => false;

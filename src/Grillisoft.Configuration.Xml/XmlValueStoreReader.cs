@@ -11,14 +11,18 @@ namespace Grillisoft.Configuration.Xml
     {
         public async Task<IValuesStore> Load(string folder, string name)
         {
-            using (var stream = File.OpenRead(Path.Combine(folder, name + ".xml")))
+            //https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/using-async-for-file-access
+            using (var stream = new FileStream(Path.Combine(folder, name + ".xml"), FileMode.Open, FileAccess.Read, FileShare.Read, 4096, useAsync: true))
             using (var reader = XmlReader.Create(stream, Settings))
             {
-                return await LoadInternal(reader, folder);
+                var data = await LoadInternal(reader, folder);
+                var parent = await LoadParent(folder, data.Item2);
+
+                return new MemoryValuesStore(data.Item1, parent);
             }
         }
 
-        private async Task<MemoryValuesStore> LoadInternal(XmlReader reader, string folder)
+        private async Task<(IDictionary<string, string>, string)> LoadInternal(XmlReader reader, string folder)
         {
             while (await reader.ReadAsync())
             {
@@ -28,10 +32,10 @@ namespace Grillisoft.Configuration.Xml
                         if (!reader.Name.Equals("keys", StringComparison.InvariantCultureIgnoreCase))
                             break;
 
-                        var parent = await this.LoadParent(folder, reader.GetAttribute("parent"));
+                        var parent = reader.GetAttribute("parent");
                         var values = await LoadKeys(reader.ReadSubtree());
 
-                        return new MemoryValuesStore(values, parent);
+                        return (values, parent);
                 }
             }
 
