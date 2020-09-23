@@ -7,7 +7,7 @@ namespace Grillisoft.Configuration.Json.Tests
 {
     public class JsonValueStoreReaderTests
     {
-        private readonly IValuesStoreReader _reader;
+        private readonly IValueStoreReader _reader;
 
         public JsonValueStoreReaderTests()
         {

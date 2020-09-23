@@ -3,18 +3,18 @@ using Grillisoft.Configuration.Parsers;
 
 namespace Grillisoft.Configuration.Stores
 {
-    public class MemoryValuesStore : IValuesStoreWritable
+    public class MemoryValueStore : IValueStoreWritable
     {
         private readonly Dictionary<string, string> _values;
         private readonly IValueParser _parser;
-        private readonly IValuesStore _parent;
+        private readonly IValueStore _parent;
 
-        public MemoryValuesStore(IValuesStore parent = null)
+        public MemoryValueStore(IValueStore parent = null)
             : this(null, parent, null)
         {
         }
 
-        public MemoryValuesStore(IDictionary<string, string> source, IValuesStore parent = null, IValueParser parser = null)
+        public MemoryValueStore(IDictionary<string, string> source, IValueStore parent = null, IValueParser parser = null)
         {
             _values = source != null ? new Dictionary<string, string>(source) : new Dictionary<string, string>();
             _parent = parent;

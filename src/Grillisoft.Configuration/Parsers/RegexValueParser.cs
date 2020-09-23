@@ -18,12 +18,12 @@ namespace Grillisoft.Configuration.Parsers
             _regex = new Regex(pattern, RegexOptions.Compiled);
         }
 
-        public string Parse(string key, string value, IValuesStore store)
+        public string Parse(string key, string value, IValueStore store)
         {
-            return this.ParseSafe(value, store.IsSafe ? store : new SafeValuesStore(store, key));
+            return this.ParseSafe(value, store.IsSafe ? store : new SafeValueStore(store, key));
         }
 
-        private string ParseSafe(string value, IValuesStore store)
+        private string ParseSafe(string value, IValueStore store)
         {
             if (String.IsNullOrWhiteSpace(value))
                 return value;

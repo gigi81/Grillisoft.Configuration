@@ -1,6 +1,6 @@
 ﻿namespace Grillisoft.Configuration
 {
-    public interface IValuesStore
+    public interface IValueStore
     {
         /// <summary>
         /// Tries to find a <paramref name="value"/> for the specified <paramref name="key"/>
@@ -11,12 +11,12 @@
         bool TryGetValue(string key, out string value);
 
         /// <summary>
-        /// Returns true if the <see cref="IValuesStore"/> detects circular calls when parsing values on calls to <see cref="TryGetValue"/>, otherwise false
+        /// Returns true if the <see cref="IValueStore"/> detects circular calls when parsing values on calls to <see cref="TryGetValue"/>, otherwise false
         /// </summary>
         bool IsSafe { get; }
 
         /// <summary>
-        /// Returns true if the <see cref="IValuesStore"/> has no parent
+        /// Returns true if the <see cref="IValueStore"/> has no parent
         /// </summary>
         bool IsRoot { get; }
     }

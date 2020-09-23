@@ -8,7 +8,7 @@ namespace Grillisoft.Configuration.Xml.Tests
 {
     public class XmlValueStoreReaderTests
     {
-        private readonly IValuesStoreReader _reader;
+        private readonly IValueStoreReader _reader;
 
         public XmlValueStoreReaderTests()
         {

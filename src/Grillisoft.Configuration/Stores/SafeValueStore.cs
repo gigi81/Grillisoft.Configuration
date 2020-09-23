@@ -2,17 +2,17 @@
 
 namespace Grillisoft.Configuration.Stores
 {
-    public class SafeValuesStore : IValuesStore
+    public class SafeValueStore : IValueStore
     {
         private readonly HashSet<string> _keys = new HashSet<string>();
-        private readonly IValuesStore _store;
+        private readonly IValueStore _store;
 
-        public SafeValuesStore(IValuesStore store)
+        public SafeValueStore(IValueStore store)
         {
             _store = store;
         }
 
-        public SafeValuesStore(IValuesStore store, string key)
+        public SafeValueStore(IValueStore store, string key)
             : this(store)
         {
             _keys.Add(key);

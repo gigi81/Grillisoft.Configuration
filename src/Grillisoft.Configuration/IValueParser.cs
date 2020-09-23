@@ -2,6 +2,6 @@
 {
     public interface IValueParser
     {
-        string Parse(string key, string value, IValuesStore valuesStore);
+        string Parse(string key, string value, IValueStore valuesStore);
     }
 }

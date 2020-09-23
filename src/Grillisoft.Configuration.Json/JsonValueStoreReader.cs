@@ -6,14 +6,14 @@ using Grillisoft.Configuration.Stores;
 
 namespace Grillisoft.Configuration.Json
 {
-    public class JsonValueStoreReader : IValuesStoreReader
+    public class JsonValueStoreReader : IValueStoreReader
     {
-        public async Task<IValuesStore> Load(string folder, string name)
+        public async Task<IValueStore> Load(string folder, string name)
         {
             var model = await LoadInternal(Path.Combine(folder, name + ".json"));
             var parent = await LoadParent(folder, model.Parent);
 
-            return new MemoryValuesStore(model.Keys, parent);
+            return new MemoryValueStore(model.Keys, parent);
         }
 
         private async Task<JsonStoreModel> LoadInternal(string path)
@@ -25,7 +25,7 @@ namespace Grillisoft.Configuration.Json
             }
         }
 
-        private async Task<IValuesStore> LoadParent(string folder, string name)
+        private async Task<IValueStore> LoadParent(string folder, string name)
         {
             if (String.IsNullOrWhiteSpace(name))
                 return null;

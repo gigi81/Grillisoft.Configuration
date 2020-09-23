@@ -7,9 +7,9 @@ using System.Xml;
 
 namespace Grillisoft.Configuration.Xml
 {
-    public class XmlValueStoreReader : IValuesStoreReader
+    public class XmlValueStoreReader : IValueStoreReader
     {
-        public async Task<IValuesStore> Load(string folder, string name)
+        public async Task<IValueStore> Load(string folder, string name)
         {
             //https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/using-async-for-file-access
             using (var stream = new FileStream(Path.Combine(folder, name + ".xml"), FileMode.Open, FileAccess.Read, FileShare.Read, 4096, useAsync: true))
@@ -18,7 +18,7 @@ namespace Grillisoft.Configuration.Xml
                 var data = await LoadInternal(reader, folder);
                 var parent = await LoadParent(folder, data.Item2);
 
-                return new MemoryValuesStore(data.Item1, parent);
+                return new MemoryValueStore(data.Item1, parent);
             }
         }
 
@@ -42,7 +42,7 @@ namespace Grillisoft.Configuration.Xml
             throw new Exception("Root 'keys' element not found");
         }
 
-        private async Task<IValuesStore> LoadParent(string folder, string name)
+        private async Task<IValueStore> LoadParent(string folder, string name)
         {
             if (String.IsNullOrWhiteSpace(name))
                 return null;

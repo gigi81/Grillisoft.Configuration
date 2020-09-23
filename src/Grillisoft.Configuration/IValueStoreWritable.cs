@@ -1,6 +1,6 @@
 ﻿namespace Grillisoft.Configuration
 {
-    public interface IValuesStoreWritable : IValuesStore
+    public interface IValueStoreWritable : IValueStore
     {
         void Set(string key, string value);
 
