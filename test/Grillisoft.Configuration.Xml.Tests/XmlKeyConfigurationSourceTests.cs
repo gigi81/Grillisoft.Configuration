@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Grillisoft.Configuration.Xml.Tests
 {
-    public class XmlValueStoreReaderTests
+    public class XmlKeyConfigurationSourceTests
     {
         [Fact]
         public void LoadRoot()

@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Grillisoft.Configuration.Json.Tests
 {
-    public class JsonValueStoreReaderTests
+    public class JsonKeyConfigurationSourceTests
     {
         [Fact]
         public void LoadRoot()
