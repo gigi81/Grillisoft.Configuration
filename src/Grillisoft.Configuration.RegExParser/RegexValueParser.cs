@@ -19,12 +19,12 @@ namespace Grillisoft.Configuration.Parsers
             _regex = new Regex(pattern, RegexOptions.Compiled);
         }
 
-        public string Parse(string key, string value, IConfiguration configuration)
+        public string Parse(string key, string value, IConfigurationRoot configuration)
         {
             return this.ParseInternal(value, configuration, new Stack<string>(new[] { key }));
         }
 
-        private string ParseInternal(string value, IConfiguration configuration, Stack<string> stack)
+        private string ParseInternal(string value, IConfigurationRoot configuration, Stack<string> stack)
         {
             if (String.IsNullOrWhiteSpace(value))
                 return value;
