@@ -19,4 +19,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Grillisoft.Configuration.Json\Grillisoft.Configuration.Json.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="nodir.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

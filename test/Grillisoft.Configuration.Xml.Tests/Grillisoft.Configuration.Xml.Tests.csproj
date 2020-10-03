@@ -19,4 +19,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Grillisoft.Configuration.Xml\Grillisoft.Configuration.Xml.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="nodir.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

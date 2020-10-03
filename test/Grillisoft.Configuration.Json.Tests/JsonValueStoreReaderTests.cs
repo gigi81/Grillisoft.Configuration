@@ -1,53 +1,44 @@
-using System;
-using System.IO;
-using System.Reflection;
+using Microsoft.Extensions.Configuration;
 using Xunit;
 
 namespace Grillisoft.Configuration.Json.Tests
 {
     public class JsonValueStoreReaderTests
     {
-        private readonly IValueStoreReader _reader;
-
-        public JsonValueStoreReaderTests()
-        {
-            _reader = new JsonValueStoreReader();
-        }
-
         [Fact]
         public void LoadRoot()
         {
-            var store = _reader.Load(Path.Combine(AssemblyDirectory, "Data"), "root").Result;
+            var configuration = new ConfigurationBuilder()
+                .AddJsonKeyFile("Data", new[] { "root" })
+                .Build();
 
-            Assert.Equal("example value", store.Get("key01"));
-            Assert.Equal("example value", store.Get("key02"));
-            Assert.Equal("example value", store.Get("key03"));
-            Assert.Equal("example value", store.Get("key04"));
-
-            Assert.True(store.IsRoot);
+            Assert.Equal("example value", configuration["key01"]);
+            Assert.Equal("example value", configuration["key02"]);
+            Assert.Equal("example value", configuration["key03"]);
+            Assert.Equal("example value", configuration["key04"]);
         }
 
         [Fact]
         public void LoadChild01()
         {
-            var store = _reader.Load(Path.Combine(AssemblyDirectory, "Data"), "child01").Result;
+            var configuration = new ConfigurationBuilder()
+                .AddJsonKeyFile("Data", new[] { "child01" })
+                .Build();
 
-            Assert.Equal("example value override", store.Get("key01"));
-            Assert.Equal("example value", store.Get("key02"));
-            Assert.Equal("example value", store.Get("key03"));
-            Assert.Equal("example value", store.Get("key04"));
-
-            Assert.False(store.IsRoot);
+            Assert.Equal("example value override", configuration["key01"]);
+            Assert.Equal("example value", configuration["key02"]);
+            Assert.Equal("example value", configuration["key03"]);
+            Assert.Equal("example value", configuration["key04"]);
         }
 
-        private static string AssemblyDirectory
+        [Fact]
+        public void LoadNullDirectory()
         {
-            get
-            {
-                UriBuilder uri = new UriBuilder(Assembly.GetExecutingAssembly().CodeBase);
-                string path = Uri.UnescapeDataString(uri.Path);
-                return Path.GetDirectoryName(path);
-            }
+            var configuration = new ConfigurationBuilder()
+                .AddJsonKeyFile(new[] { "nodir" })
+                .Build();
+
+            Assert.Equal("example value nodir", configuration["key01"]);
         }
     }
 }
