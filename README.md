@@ -14,21 +14,21 @@ Parsing is very usefull to recycle settings keys and automatically compose strin
 The combination of these two features is very powerfull and allows extreme flexibility.
 For example:
 On your UAT settings file you have these key/value pairs:
-env: uat
-sqlserverhost: sql-${env}.contoso.com
-mailhost: mail-${env}.contoso.com
+- env: uat
+- sqlserverhost: sql-${env}.contoso.com
+- mailhost: mail-${env}.contoso.com
 
 On your PROD file:
-env: prod
+- env: prod
 
 On your DEV file:
-env: dev
-sqlserverhost: localhost
+- env: dev
+- sqlserverhost: localhost
 
 Now when requesting the setting for "sqlserverhost", here is the outcome for the above example depending on the environment:
-UAT: sql-uat.contoso.com
-PROD: sql-prod.contoso.com
-DEV: localhost
+- UAT: sql-uat.contoso.com
+- PROD: sql-prod.contoso.com
+- DEV: localhost
 
 ```csharp
 using Grillisoft.Configuration
