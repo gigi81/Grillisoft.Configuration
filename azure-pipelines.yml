@@ -32,10 +32,10 @@ steps:
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 
 - task: NuGetCommand@2
-    displayName: 'NuGet push private feed'
-    inputs:
-      command: push
-      publishVstsFeed: '/Grillisoft.Configuration/configuration'
+  displayName: 'NuGet push to project feed'
+  inputs:
+    command: push
+    publishVstsFeed: '/Grillisoft.Configuration/configuration'
 
 #  - task: NuGetCommand@2
 #    displayName: 'NuGet push nuget.org feed'
