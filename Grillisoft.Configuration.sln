@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30330.147
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{393154A9-3ADB-427D-B7BE-978DE247408A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Grillisoft.Configuration.FileExtensions", "src\Grillisoft.Configuration\Grillisoft.Configuration.FileExtensions.csproj", "{125985A2-276D-45AD-9703-937353ABBEEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Grillisoft.Configuration.FileExtensions", "src\Grillisoft.Configuration.FileExtensions\Grillisoft.Configuration.FileExtensions.csproj", "{125985A2-276D-45AD-9703-937353ABBEEC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Grillisoft.Configuration.Xml", "src\Grillisoft.Configuration.Xml\Grillisoft.Configuration.Xml.csproj", "{14AA0204-2CDC-4381-B154-B9ECDC31C031}"
 EndProject
