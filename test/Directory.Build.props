@@ -1,8 +1,11 @@
 <Project>
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.1;net461</TargetFrameworks>
+    <LangVersion>8.0</LangVersion>
     <IsPackable>false</IsPackable>
     <LangVersion>8.0</LangVersion>
+    <MinMicrosoftExtensionsConfigurationVersion>2.0</MinMicrosoftExtensionsConfigurationVersion>
+    <MinSystemTextJson>4.6</MinSystemTextJson>
   </PropertyGroup>
 
   <ItemGroup>

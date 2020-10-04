@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>8.0</LangVersion>
-    <MinMicrosoftExtensionsConfigurationVersion>2.0.0</MinMicrosoftExtensionsConfigurationVersion>
-    <MinSystemTextJson>4.6.0</MinSystemTextJson>
+    <MinMicrosoftExtensionsConfigurationVersion>2.0</MinMicrosoftExtensionsConfigurationVersion>
+    <MinSystemTextJson>4.6</MinSystemTextJson>
   </PropertyGroup>
 </Project>
