@@ -38,4 +38,4 @@ steps:
   displayName: 'NuGet push private feed'
   inputs:
     command: push
-    publishVstsFeed: 'grilli'
+    publishVstsFeed: 'Grillisoft.Configuration/grilli'
