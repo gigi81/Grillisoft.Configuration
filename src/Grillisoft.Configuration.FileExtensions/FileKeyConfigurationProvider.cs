@@ -1,4 +1,6 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+﻿// source: https://github.com/dotnet/runtime/blob/master/src/libraries/Microsoft.Extensions.Configuration.FileExtensions/src/FileConfigurationProvider.cs
+// Original Copyright Notice:
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -154,7 +156,8 @@ namespace Grillisoft.Configuration
 
         private void HandleException(ExceptionDispatchInfo info)
         {
-            bool ignoreException = false;
+            var ignoreException = false;
+
             if (Source.OnLoadException != null)
             {
                 var exceptionContext = new FileKeyLoadExceptionContext
@@ -165,10 +168,9 @@ namespace Grillisoft.Configuration
                 Source.OnLoadException.Invoke(exceptionContext);
                 ignoreException = exceptionContext.Ignore;
             }
+
             if (!ignoreException)
-            {
                 info.Throw();
-            }
         }
 
         /// <inheritdoc />

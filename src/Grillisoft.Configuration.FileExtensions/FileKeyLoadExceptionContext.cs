@@ -1,4 +1,6 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+﻿// source: https://github.com/dotnet/runtime/blob/72d1f6bbb4aa39d71e2348ed9621129c63a7c04a/src/libraries/Microsoft.Extensions.Configuration.FileExtensions/src/FileLoadExceptionContext.cs
+// Original Copyright Notice:
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;

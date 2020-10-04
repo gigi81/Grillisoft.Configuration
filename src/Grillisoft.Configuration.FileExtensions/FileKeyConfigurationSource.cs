@@ -1,4 +1,9 @@
-﻿using System;
+﻿// source: https://github.com/dotnet/runtime/blob/master/src/libraries/Microsoft.Extensions.Configuration.FileExtensions/src/FileConfigurationSource.cs
+// Original Copyright Notice:
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Microsoft.Extensions.Configuration;
@@ -13,6 +18,9 @@ namespace Grillisoft.Configuration
         /// </summary>
         public string DirectoryPath { get; set; }
 
+        /// <summary>
+        /// Extensions of the configuration files to load
+        /// </summary>
         public abstract string Extension { get; }
 
         /// <summary>
