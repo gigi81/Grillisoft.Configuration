@@ -10,12 +10,12 @@ namespace Grillisoft.Configuration
     /// <summary>
     /// Contains information about a file load exception.
     /// </summary>
-    public class FileKeyLoadExceptionContext
+    public class FileTreeLoadExceptionContext
     {
         /// <summary>
         /// The <see cref="FileConfigurationProvider"/> that caused the exception.
         /// </summary>
-        public FileKeyConfigurationProvider Provider { get; set; }
+        public FileTreeConfigurationProvider Provider { get; set; }
 
         /// <summary>
         /// The exception that occurred in Load.

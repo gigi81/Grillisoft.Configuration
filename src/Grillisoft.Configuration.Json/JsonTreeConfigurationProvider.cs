@@ -4,13 +4,13 @@ using System.Text.Json;
 
 namespace Grillisoft.Configuration.Json
 {
-    public class JsonKeyConfigurationProvider : FileKeyConfigurationProvider
+    public class JsonTreeConfigurationProvider : FileTreeConfigurationProvider
     {
         /// <summary>
         /// Initializes a new instance with the specified source.
         /// </summary>
         /// <param name="source">The source settings.</param>
-        public JsonKeyConfigurationProvider(JsonKeyConfigurationSource source) : base(source) { }
+        public JsonTreeConfigurationProvider(JsonTreeConfigurationSource source) : base(source) { }
 
         public override IDictionary<string, string> Load(Stream stream, out string parentKey)
         {

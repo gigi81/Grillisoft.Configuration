@@ -18,7 +18,7 @@ namespace Grillisoft.Configuration
     /// <summary>
     /// Base class for file based <see cref="ConfigurationProvider"/>.
     /// </summary>
-    public abstract class FileKeyConfigurationProvider : ConfigurationProvider, IDisposable
+    public abstract class FileTreeConfigurationProvider : ConfigurationProvider, IDisposable
     {
         private readonly IDisposable _changeTokenRegistration;
 
@@ -26,7 +26,7 @@ namespace Grillisoft.Configuration
         /// Initializes a new instance with the specified source.
         /// </summary>
         /// <param name="source">The source settings.</param>
-        public FileKeyConfigurationProvider(FileKeyConfigurationSource source)
+        public FileTreeConfigurationProvider(FileTreeConfigurationSource source)
         {
             Source = source ?? throw new ArgumentNullException(nameof(source));
 
@@ -44,7 +44,7 @@ namespace Grillisoft.Configuration
         /// <summary>
         /// The source settings for this provider.
         /// </summary>
-        public FileKeyConfigurationSource Source { get; }
+        public FileTreeConfigurationSource Source { get; }
 
         private void Load(bool reload)
         {
@@ -160,7 +160,7 @@ namespace Grillisoft.Configuration
 
             if (Source.OnLoadException != null)
             {
-                var exceptionContext = new FileKeyLoadExceptionContext
+                var exceptionContext = new FileTreeLoadExceptionContext
                 {
                     Provider = this,
                     Exception = info.SourceException

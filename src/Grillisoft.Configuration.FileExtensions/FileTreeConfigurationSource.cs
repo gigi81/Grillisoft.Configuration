@@ -11,7 +11,7 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Grillisoft.Configuration
 {
-    public abstract class FileKeyConfigurationSource : IConfigurationSource
+    public abstract class FileTreeConfigurationSource : IConfigurationSource
     {
         /// <summary>
         /// The path to the directory containging the configuation files.
@@ -52,7 +52,7 @@ namespace Grillisoft.Configuration
         /// <summary>
         /// Will be called if an uncaught exception occurs in FileConfigurationProvider.Load.
         /// </summary>
-        public Action<FileKeyLoadExceptionContext> OnLoadException { get; set; }
+        public Action<FileTreeLoadExceptionContext> OnLoadException { get; set; }
 
         /// <summary>
         /// Builds the <see cref="IConfigurationProvider"/> for this source.

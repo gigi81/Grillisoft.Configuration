@@ -5,9 +5,9 @@ using System.Xml;
 
 namespace Grillisoft.Configuration.Xml
 {
-    public class XmlKeyConfigurationProvider : FileKeyConfigurationProvider
+    public class XmlTreeConfigurationProvider : FileTreeConfigurationProvider
     {
-        public XmlKeyConfigurationProvider(XmlKeyConfigurationSource source) : base(source) {}
+        public XmlTreeConfigurationProvider(XmlTreeConfigurationSource source) : base(source) {}
 
         public override IDictionary<string, string> Load(Stream stream, out string parentKey)
         {

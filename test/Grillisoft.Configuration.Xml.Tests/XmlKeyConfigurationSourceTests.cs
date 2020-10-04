@@ -9,7 +9,7 @@ namespace Grillisoft.Configuration.Xml.Tests
         public void LoadRoot()
         {
             var configuration = new ConfigurationBuilder()
-                .AddXmlKeyFile("Data", new[] { "root" })
+                .AddXmlTree("Data", new[] { "root" })
                 .Build();
 
             Assert.Equal("example value", configuration["key01"]);
@@ -22,7 +22,7 @@ namespace Grillisoft.Configuration.Xml.Tests
         public void LoadChild01()
         {
             var configuration = new ConfigurationBuilder()
-                .AddXmlKeyFile("Data", new[] { "child01" })
+                .AddXmlTree("Data", new[] { "child01" })
                 .Build();
 
             Assert.Equal("example value override", configuration["key01"]);
@@ -35,7 +35,7 @@ namespace Grillisoft.Configuration.Xml.Tests
         public void LoadNullDirectory()
         {
             var configuration = new ConfigurationBuilder()
-                .AddXmlKeyFile(new[] { "nodir" })
+                .AddXmlTree(new[] { "nodir" })
                 .Build();
 
             Assert.Equal("example value nodir", configuration["key01"]);

@@ -1,13 +1,13 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace Grillisoft.Configuration.Json
+namespace Grillisoft.Configuration.Xml
 {
     /// <summary>
-    /// Represents a JSON file as an <see cref="IConfigurationSource"/>.
+    /// Represents a XML file as an <see cref="IConfigurationSource"/>.
     /// </summary>
-    public class JsonKeyConfigurationSource : FileKeyConfigurationSource
+    public class XmlTreeConfigurationSource : FileTreeConfigurationSource
     {
-        public override string Extension => "json";
+        public override string Extension => "xml";
 
         /// <summary>
         /// Builds the <see cref="JsonKeyConfigurationProvider"/> for this source.
@@ -17,7 +17,7 @@ namespace Grillisoft.Configuration.Json
         public override IConfigurationProvider Build(IConfigurationBuilder builder)
         {
             EnsureDefaults(builder);
-            return new JsonKeyConfigurationProvider(this);
+            return new XmlTreeConfigurationProvider(this);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Grillisoft.Configuration.Json.Tests
         public void LoadRoot()
         {
             var configuration = new ConfigurationBuilder()
-                .AddJsonKeyFile("Data", new[] { "root" })
+                .AddJsonTree("Data", new[] { "root" })
                 .Build();
 
             Assert.Equal("example value", configuration["key01"]);
@@ -22,7 +22,7 @@ namespace Grillisoft.Configuration.Json.Tests
         public void LoadChild01()
         {
             var configuration = new ConfigurationBuilder()
-                .AddJsonKeyFile("Data", new[] { "child01" })
+                .AddJsonTree("Data", new[] { "child01" })
                 .Build();
 
             Assert.Equal("example value override", configuration["key01"]);
@@ -35,7 +35,7 @@ namespace Grillisoft.Configuration.Json.Tests
         public void LoadNullDirectory()
         {
             var configuration = new ConfigurationBuilder()
-                .AddJsonKeyFile(new[] { "nodir" })
+                .AddJsonTree(new[] { "nodir" })
                 .Build();
 
             Assert.Equal("example value nodir", configuration["key01"]);

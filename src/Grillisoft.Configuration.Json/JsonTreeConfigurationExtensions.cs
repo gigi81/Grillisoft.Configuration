@@ -3,49 +3,49 @@ using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.FileProviders;
 
-namespace Grillisoft.Configuration.Xml
+namespace Grillisoft.Configuration.Json
 {
-    public static class XmlKeyConfigurationExtensions
+    public static class JsonTreeConfigurationExtensions
     {
         /// <summary>
-        /// Adds the XML configuration provider at <paramref name="path"/> to <paramref name="builder"/>.
+        /// Adds the JSON configuration provider at <paramref name="path"/> to <paramref name="builder"/>.
         /// </summary>
         /// <param name="builder">The <see cref="IConfigurationBuilder"/> to add to.</param>
         /// <param name="path">Path relative to the base path stored in 
         /// <see cref="IConfigurationBuilder.Properties"/> of <paramref name="builder"/>.</param>
         /// <returns>The <see cref="IConfigurationBuilder"/>.</returns>
-        public static IConfigurationBuilder AddXmlKeyFile(this IConfigurationBuilder builder, IEnumerable<string> keys)
+        public static IConfigurationBuilder AddJsonTree(this IConfigurationBuilder builder, IEnumerable<string> keys)
         {
-            return AddXmlKeyFile(builder, provider: null, directoryPath: ".", keys: keys, optional: false, reloadOnChange: false);
+            return AddJsonTree(builder, provider: null, directoryPath: null, keys: keys, optional: false, reloadOnChange: false);
         }
 
         /// <summary>
-        /// Adds the XML configuration provider at <paramref name="path"/> to <paramref name="builder"/>.
+        /// Adds the JSON configuration provider at <paramref name="path"/> to <paramref name="builder"/>.
         /// </summary>
         /// <param name="builder">The <see cref="IConfigurationBuilder"/> to add to.</param>
         /// <param name="path">Path relative to the base path stored in 
         /// <see cref="IConfigurationBuilder.Properties"/> of <paramref name="builder"/>.</param>
         /// <returns>The <see cref="IConfigurationBuilder"/>.</returns>
-        public static IConfigurationBuilder AddXmlKeyFile(this IConfigurationBuilder builder, string directoryPath, IEnumerable<string> keys)
+        public static IConfigurationBuilder AddJsonTree(this IConfigurationBuilder builder, string directoryPath, IEnumerable<string> keys)
         {
-            return AddXmlKeyFile(builder, provider: null, directoryPath: directoryPath, keys: keys, optional: false, reloadOnChange: false);
+            return AddJsonTree(builder, provider: null, directoryPath: directoryPath, keys: keys, optional: false, reloadOnChange: false);
         }
 
         /// <summary>
-        /// Adds the XML configuration provider at <paramref name="path"/> to <paramref name="builder"/>.
+        /// Adds the JSON configuration provider at <paramref name="path"/> to <paramref name="builder"/>.
         /// </summary>
         /// <param name="builder">The <see cref="IConfigurationBuilder"/> to add to.</param>
         /// <param name="path">Path relative to the base path stored in 
         /// <see cref="IConfigurationBuilder.Properties"/> of <paramref name="builder"/>.</param>
         /// <param name="optional">Whether the file is optional.</param>
         /// <returns>The <see cref="IConfigurationBuilder"/>.</returns>
-        public static IConfigurationBuilder AddXmlKeyFile(this IConfigurationBuilder builder, string directoryPath, IEnumerable<string> keys, bool optional)
+        public static IConfigurationBuilder AddJsonTree(this IConfigurationBuilder builder, string directoryPath, IEnumerable<string> keys, bool optional)
         {
-            return AddXmlKeyFile(builder, provider: null, directoryPath: directoryPath, keys: keys, optional: optional, reloadOnChange: false);
+            return AddJsonTree(builder, provider: null, directoryPath: directoryPath, keys: keys, optional: optional, reloadOnChange: false);
         }
 
         /// <summary>
-        /// Adds the XML configuration provider at <paramref name="path"/> to <paramref name="builder"/>.
+        /// Adds the JSON configuration provider at <paramref name="path"/> to <paramref name="builder"/>.
         /// </summary>
         /// <param name="builder">The <see cref="IConfigurationBuilder"/> to add to.</param>
         /// <param name="path">Path relative to the base path stored in 
@@ -53,13 +53,13 @@ namespace Grillisoft.Configuration.Xml
         /// <param name="optional">Whether the file is optional.</param>
         /// <param name="reloadOnChange">Whether the configuration should be reloaded if the file changes.</param>
         /// <returns>The <see cref="IConfigurationBuilder"/>.</returns>
-        public static IConfigurationBuilder AddXmlKeyFile(this IConfigurationBuilder builder, string directoryPath, IEnumerable<string> keys, bool optional, bool reloadOnChange)
+        public static IConfigurationBuilder AddJsonTree(this IConfigurationBuilder builder, string directoryPath, IEnumerable<string> keys, bool optional, bool reloadOnChange)
         {
-            return AddXmlKeyFile(builder, provider: null, directoryPath: directoryPath, keys: keys, optional: optional, reloadOnChange: reloadOnChange);
+            return AddJsonTree(builder, provider: null, directoryPath: directoryPath, keys: keys, optional: optional, reloadOnChange: reloadOnChange);
         }
 
         /// <summary>
-        /// Adds a XML configuration source to <paramref name="builder"/>.
+        /// Adds a JSON configuration source to <paramref name="builder"/>.
         /// </summary>
         /// <param name="builder">The <see cref="IConfigurationBuilder"/> to add to.</param>
         /// <param name="provider">The <see cref="IFileProvider"/> to use to access the file.</param>
@@ -68,15 +68,12 @@ namespace Grillisoft.Configuration.Xml
         /// <param name="optional">Whether the file is optional.</param>
         /// <param name="reloadOnChange">Whether the configuration should be reloaded if the file changes.</param>
         /// <returns>The <see cref="IConfigurationBuilder"/>.</returns>
-        public static IConfigurationBuilder AddXmlKeyFile(this IConfigurationBuilder builder, IFileProvider provider, string directoryPath, IEnumerable<string> keys, bool optional, bool reloadOnChange)
+        public static IConfigurationBuilder AddJsonTree(this IConfigurationBuilder builder, IFileProvider provider, string directoryPath, IEnumerable<string> keys, bool optional, bool reloadOnChange)
         {
             if (builder == null)
                 throw new ArgumentNullException(nameof(builder));
 
-            if (string.IsNullOrEmpty(directoryPath))
-                throw new ArgumentException(Resources.Error_InvalidDirectoryPath, nameof(directoryPath));
-
-            return builder.AddXmlKeyFile(s =>
+            return builder.AddJsonTree(s =>
             {
                 s.FileProvider = provider;
                 s.DirectoryPath = directoryPath;
@@ -88,12 +85,12 @@ namespace Grillisoft.Configuration.Xml
         }
 
         /// <summary>
-        /// Adds a XML configuration source to <paramref name="builder"/>.
+        /// Adds a JSON configuration source to <paramref name="builder"/>.
         /// </summary>
         /// <param name="builder">The <see cref="IConfigurationBuilder"/> to add to.</param>
         /// <param name="configureSource">Configures the source.</param>
         /// <returns>The <see cref="IConfigurationBuilder"/>.</returns>
-        public static IConfigurationBuilder AddXmlKeyFile(this IConfigurationBuilder builder, Action<XmlKeyConfigurationSource> configureSource)
+        public static IConfigurationBuilder AddJsonTree(this IConfigurationBuilder builder, Action<JsonTreeConfigurationSource> configureSource)
             => builder.Add(configureSource);
     }
 }

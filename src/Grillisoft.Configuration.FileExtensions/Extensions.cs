@@ -12,7 +12,7 @@ namespace Grillisoft.Configuration
         /// </summary>
         /// <param name="builder">The <see cref="IConfigurationBuilder"/>.</param>
         /// <returns>The <see cref="IConfigurationBuilder"/>.</returns>
-        public static Action<FileKeyLoadExceptionContext> GetFileKeyLoadExceptionHandler(this IConfigurationBuilder builder)
+        public static Action<FileTreeLoadExceptionContext> GetFileKeyLoadExceptionHandler(this IConfigurationBuilder builder)
         {
             if (builder == null)
             {
@@ -21,7 +21,7 @@ namespace Grillisoft.Configuration
 
             if (builder.Properties.TryGetValue(FileLoadExceptionHandlerKey, out object handler))
             {
-                return handler as Action<FileKeyLoadExceptionContext>;
+                return handler as Action<FileTreeLoadExceptionContext>;
             }
             return null;
         }
