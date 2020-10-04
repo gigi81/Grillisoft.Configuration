@@ -35,7 +35,7 @@ steps:
   displayName: 'NuGet push to project feed'
   inputs:
     command: push
-    publishVstsFeed: '/Grillisoft.Configuration/configuration'
+    publishVstsFeed: 'Grillisoft.Configuration/configuration'
 
 #  - task: NuGetCommand@2
 #    displayName: 'NuGet push nuget.org feed'
