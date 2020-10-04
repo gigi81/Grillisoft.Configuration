@@ -121,7 +121,7 @@ namespace Grillisoft.Configuration
                 return fileInfo.CreateReadStream();
             }
 
-            using (var stream = file.CreateReadStream())
+            using (var stream = OpenRead(file))
             {
                 try
                 {
@@ -129,21 +129,7 @@ namespace Grillisoft.Configuration
                 }
                 catch (Exception e)
                 {
-                    bool ignoreException = false;
-                    if (Source.OnLoadException != null)
-                    {
-                        var exceptionContext = new FileKeyLoadExceptionContext
-                        {
-                            Provider = this,
-                            Exception = e
-                        };
-                        Source.OnLoadException.Invoke(exceptionContext);
-                        ignoreException = exceptionContext.Ignore;
-                    }
-                    if (!ignoreException)
-                    {
-                        throw e;
-                    }
+                    HandleException(ExceptionDispatchInfo.Capture(e));
                 }
             }
 
