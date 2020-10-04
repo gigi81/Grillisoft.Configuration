@@ -31,11 +31,16 @@ steps:
     projects: 'test/*.csproj'
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 
-- task: NuGetAuthenticate@0
-  displayName: 'NuGet Authenticate'
-  
 - task: NuGetCommand@2
-  displayName: 'NuGet push private feed'
-  inputs:
-    command: push
-    publishVstsFeed: 'Grillisoft.Configuration/luigigrilli'
+    displayName: 'NuGet push private feed'
+    inputs:
+      command: push
+      publishVstsFeed: '/Grillisoft.Configuration/configuration'
+
+#  - task: NuGetCommand@2
+#    displayName: 'NuGet push nuget.org feed'
+#    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/stable'))
+#    inputs:
+#      command: push
+#      nuGetFeedType: external
+#      publishFeedCredentials: nuget.org
