@@ -5,10 +5,10 @@ A collection of packages to add 2 features to the Microsoft.Extensions.Configura
 - Parsing
 
 ## File Tree
-Create a settings tree where child can overwrite settings of their parent. This is very useful to create environments settings where for example UAT is the root and then you have production and development that overwrite the settings of the parent. You can use XML or JSON files depending on your taste.
+Create a settings tree where child can override settings of their parent. This is very useful for example to create environments settings where for example UAT is the root and then you have production, qa and development that override the settings of their parent(s). You can use XML or JSON files depending on your taste.
 
 ## Parsing
-Parsing is very usefull to recycle settings keys and automatically compose strings depending on other settings keys
+Parsing allows to compose strings depending on other settings keys. I can be used with any configuration source, with, without or in combination with a FileTree
 
 ## Example usage
 The combination of these two features is very powerfull and allows extreme flexibility.
