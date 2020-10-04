@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.FileProviders;
+using Grillisoft.Configuration.Json;
 
-namespace Grillisoft.Configuration.Json
+namespace Grillisoft.Configuration
 {
     public static class JsonTreeConfigurationExtensions
     {

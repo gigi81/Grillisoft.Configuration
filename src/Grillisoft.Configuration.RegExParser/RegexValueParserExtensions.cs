@@ -1,7 +1,7 @@
 ﻿using Grillisoft.Configuration.Parsers;
 using Microsoft.Extensions.Configuration;
 
-namespace Grillisoft.Configuration.RegExParser
+namespace Grillisoft.Configuration
 {
     public static class RegexValueParserExtensions
     {
