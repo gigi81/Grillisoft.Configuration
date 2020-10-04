@@ -30,3 +30,12 @@ steps:
     command: test
     projects: 'test/*.csproj'
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+
+- task: NuGetAuthenticate@0
+  displayName: 'NuGet Authenticate'
+  
+- task: NuGetCommand@2
+  displayName: 'NuGet push private feed'
+  inputs:
+    command: push
+    publishVstsFeed: 'grilli'
