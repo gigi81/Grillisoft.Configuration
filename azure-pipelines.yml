@@ -14,6 +14,7 @@ steps:
   inputs:
     command: restore
     projects: '**/*.csproj'
+    verbosityRestore: normal
     includeNuGetOrg: true
 
 - task: VSBuild@1
