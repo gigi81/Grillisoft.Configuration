@@ -49,7 +49,7 @@ steps:
     searchPatternPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
     includesymbols: true
     includesource: true
-    vstsFeed: 'Grillisoft.Configuration/configuration'
+    publishVstsFeed: 'Grillisoft.Configuration/configuration'
 
 #  - task: NuGetCommand@2
 #    displayName: 'NuGet push nuget.org feed'
