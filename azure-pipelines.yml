@@ -43,7 +43,7 @@ steps:
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 
 - task: DotNetCoreCLI@2
-displayName: 'NuGet push to project feed'
+  displayName: 'push to project feed'
   inputs:
     command: 'push'
     searchPatternPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
