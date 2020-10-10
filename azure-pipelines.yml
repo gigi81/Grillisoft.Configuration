@@ -32,6 +32,8 @@ steps:
     command: pack
     projects: 'src/**/*.csproj'
     outputDir: '$(Build.ArtifactStagingDirectory)'
+    verbosityPack: minimal
+    arguments: '-p:Version=$(build.buildNumber)'
 
 - task: DotNetCoreCLI@2
   displayName: test
@@ -40,12 +42,14 @@ steps:
     projects: 'test/**/*.csproj'
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 
-- task: NuGetCommand@2
-  displayName: 'NuGet push to project feed'
+- task: DotNetCoreCLI@2
+displayName: 'NuGet push to project feed'
   inputs:
-    command: push
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.*pkg'
-    publishVstsFeed: 'Grillisoft.Configuration/configuration'
+    command: 'push'
+    searchPatternPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
+    includesymbols: true
+    includesource: true
+    vstsFeed: 'Grillisoft.Configuration/configuration'
 
 #  - task: NuGetCommand@2
 #    displayName: 'NuGet push nuget.org feed'
