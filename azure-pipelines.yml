@@ -21,15 +21,23 @@ steps:
   displayName: build
   inputs:
     solution: '$(solution)'
-    msbuildArgs: '/p:PackageOutputPath="$(build.artifactStagingDirectory)" /p:Version=$(build.buildNumber)'
+    msbuildArgs: '/p:Version=$(build.buildNumber)'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+    logFileVerbosity: minimal
+
+- task: DotNetCoreCLI@2
+  displayName: pack
+  inputs:
+    command: pack
+    projects: 'src/**/*.csproj'
+    outputDir: '$(Build.ArtifactStagingDirectory)'
 
 - task: DotNetCoreCLI@2
   displayName: test
   inputs:
     command: test
-    projects: 'test/*.csproj'
+    projects: 'test/**/*.csproj'
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 
 - task: NuGetCommand@2
