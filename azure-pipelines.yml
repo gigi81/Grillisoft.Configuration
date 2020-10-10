@@ -35,6 +35,7 @@ steps:
   displayName: 'NuGet push to project feed'
   inputs:
     command: push
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.*pkg'
     publishVstsFeed: 'Grillisoft.Configuration/configuration'
 
 #  - task: NuGetCommand@2
