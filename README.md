@@ -34,7 +34,7 @@ Now when requesting the setting for "sqlserverhost", here is the outcome for the
 using Grillisoft.Configuration
 
 var configuration = new ConfigurationBuilder()
-    AddJsonTree(new[] { Environment.MachineName, Environment.GetEnvironmentVariable("ENVIRONMENT") })
+    .AddJsonTree(new[] { Environment.MachineName, Environment.GetEnvironmentVariable("ENVIRONMENT") })
     .AddRegExParser()
     .Build();
     

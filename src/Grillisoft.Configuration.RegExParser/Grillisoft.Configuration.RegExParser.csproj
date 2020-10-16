@@ -1,6 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <ProjectReference Include="..\Grillisoft.Configuration.Abstractions\Grillisoft.Configuration.Abstractions.csproj" />
+    <PackageDescription>REGEX PARSER configuration provider implementation for Grillisoft.Configuration.</PackageDescription>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Grillisoft.Configuration.Abstractions\Grillisoft.Configuration.Abstractions.csproj" />
+  </ItemGroup>
 </Project>

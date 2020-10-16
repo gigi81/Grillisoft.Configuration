@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <RootNamespace>Grillisoft.Configuration</RootNamespace>
+    <PackageDescription>Abstractions of tree and parameterized based configuration based on Microsoft.Extensions.Configuration</PackageDescription>
   </PropertyGroup>
 
   <ItemGroup>

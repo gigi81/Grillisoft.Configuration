@@ -24,6 +24,7 @@ steps:
     msbuildArgs: '/p:Version=$(build.buildNumber) /p:GeneratePackageOnBuild=true /p:PackageOutputPath="$(build.artifactStagingDirectory)"'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+    maximumCpuCount: true #enable parallel build
     logFileVerbosity: minimal
 
 - task: DotNetCoreCLI@2

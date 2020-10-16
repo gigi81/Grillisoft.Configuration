@@ -1,8 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <ProjectReference Include="..\Grillisoft.Configuration.FileExtensions\Grillisoft.Configuration.FileExtensions.csproj" />
+    <PackageDescription>JSON TREE configuration provider implementation for Grillisoft.Configuration.</PackageDescription>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Grillisoft.Configuration.FileExtensions\Grillisoft.Configuration.FileExtensions.csproj" />
+  </ItemGroup>
+  
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="$(MinMicrosoftExtensionsConfigurationVersion)" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="$(MinMicrosoftExtensionsConfigurationVersion)" />

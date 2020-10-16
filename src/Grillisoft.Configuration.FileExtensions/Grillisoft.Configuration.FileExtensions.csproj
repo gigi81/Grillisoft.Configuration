@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <RootNamespace>Grillisoft.Configuration</RootNamespace>
+    <PackageDescription>Extension methods for configuring file-based configuration providers for Grillisoft.Configuration.</PackageDescription>
   </PropertyGroup>
 
   <ItemGroup>

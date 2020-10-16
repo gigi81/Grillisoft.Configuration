@@ -4,6 +4,7 @@
     <MinMicrosoftExtensionsConfigurationVersion>2.0</MinMicrosoftExtensionsConfigurationVersion>
     <MinSystemTextJson>4.6</MinSystemTextJson>
     <AssemblyVersion>1.0.0</AssemblyVersion>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   
   <PropertyGroup>
@@ -12,8 +13,8 @@
     <RepositoryUrl>https://github.com/gigi81/Grillisoft.Configuration</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryRoot>$(MSBuildThisFileDirectory)</RepositoryRoot>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)build\Key.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 </Project>
