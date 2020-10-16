@@ -27,7 +27,7 @@ On uat.json settings file you have these key/value pairs:
 On prod.json file:
 ```json
 {
-  "parent": "uat"
+  "parent": "uat",
   "keys": {
     "env": "prod"
   }
@@ -37,9 +37,9 @@ On prod.json file:
 On dev.json file:
 ```json
 {
-  "parent": "uat"
+  "parent": "uat",
   "keys": {
-    "env": "dev"
+    "env": "dev",
     "sqlserverhost": "localhost"
   }
 }
