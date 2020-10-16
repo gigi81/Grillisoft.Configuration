@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <ItemGroup>
     <None Include="Data/*.json" CopyToOutputDirectory="Always" />
   </ItemGroup>
