@@ -1,10 +1,9 @@
 <Project>
-  <Import Project="version.props" />
-  
   <PropertyGroup>
     <LangVersion>8.0</LangVersion>
     <MinMicrosoftExtensionsConfigurationVersion>2.0</MinMicrosoftExtensionsConfigurationVersion>
     <MinSystemTextJson>4.6</MinSystemTextJson>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
   </PropertyGroup>
   
   <PropertyGroup>

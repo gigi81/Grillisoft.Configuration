@@ -21,19 +21,10 @@ steps:
   displayName: build
   inputs:
     solution: '$(solution)'
-    msbuildArgs: '/p:Version=$(build.buildNumber)'
+    msbuildArgs: '/p:Version=$(build.buildNumber) /p:GeneratePackageOnBuild=true'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
     logFileVerbosity: minimal
-
-- task: DotNetCoreCLI@2
-  displayName: pack
-  inputs:
-    command: pack
-    projects: 'src/**/*.csproj'
-    outputDir: '$(Build.ArtifactStagingDirectory)'
-    verbosityPack: minimal
-    arguments: '-p:Version=$(build.buildNumber)'
 
 - task: DotNetCoreCLI@2
   displayName: test
