@@ -21,7 +21,7 @@ steps:
   displayName: build
   inputs:
     solution: '$(solution)'
-    msbuildArgs: '/p:Version=$(build.buildNumber) /p:GeneratePackageOnBuild=true'
+    msbuildArgs: '/p:Version=$(build.buildNumber) /p:GeneratePackageOnBuild=true /p:PackageOutputPath="$(build.artifactStagingDirectory)"'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
     logFileVerbosity: minimal
@@ -37,7 +37,7 @@ steps:
   displayName: 'push to project feed'
   inputs:
     command: 'push'
-    searchPatternPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
+    searchPatternPush: '$(Build.ArtifactStagingDirectory)/**/*.*pkg'
     includesymbols: true
     includesource: true
     publishVstsFeed: 'Grillisoft.Configuration/configuration'
