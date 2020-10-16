@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <ItemGroup>
+  <PropertyGroup>
     <PackageDescription>XML TREE configuration provider implementation for Grillisoft.Configuration.</PackageDescription>
-  </ItemGroup>
+  </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Grillisoft.Configuration.FileExtensions\Grillisoft.Configuration.FileExtensions.csproj" />
