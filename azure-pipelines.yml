@@ -17,16 +17,18 @@ steps:
     errorActionPreference: stop
     script: |
       Write-Host "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') Downloading dolt"
-      Invoke-WebRequest -Uri "https://github.com/dolthub/dolt/releases/download/v0.21.0/dolt-windows-amd64.zip" -OutFile "dolt.zip"
+      Import-Module BitsTransfer
+      Start-BitsTransfer -Source "https://github.com/dolthub/dolt/releases/download/v0.21.0/dolt-windows-amd64.zip" -Destination "dolt.zip"
       
       Write-Host "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') Extracting dolt"
       Expand-Archive -Path "dolt.zip" -DestinationPath "dolt"
       
-      $doltPath = Join-Path $(Get-Location) "dolt"
+      $doltPath = Join-Path (Get-Location) "dolt"
       $env:PATH += ";$doltPath"
+      Write-Host "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') Paht set to $($env:PATH)"
       
       Write-Host "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') Checking if dolt is in the path"
-      $ret = Start-Process -FilePath "dolt" -ArgumentList 'version' -NoNewWindow -Wait -PassThru
+      $ret = Start-Process -FilePath "dolt.exe" -ArgumentList 'version' -NoNewWindow -Wait -PassThru
       Write-Host "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') Dolt check terminated with code $($ret.ExitCode)"
       exit($ret.ExitCode)
       
