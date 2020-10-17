@@ -16,11 +16,18 @@ steps:
     failOnStderr: true
     errorActionPreference: stop
     script: |
-      Write-Host "Downloading dolt"
-      Invoke-WebRequest -Uri "https://github.com/dolthub/dolt/releases/download/v0.21.0/dolt-windows-amd64.msi" -OutFile "dolt.msi"
-      Write-Host "Installing dolt"
-      $ret = Start-Process -FilePath "msiexec" -ArgumentList '/i','dolt.msi','/quiet' -NoNewWindow -Wait -PassThru
-      Write-Host "Dolt install terminated with code $($ret.ExitCode)"
+      Write-Host "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') Downloading dolt"
+      Invoke-WebRequest -Uri "https://github.com/dolthub/dolt/releases/download/v0.21.0/dolt-windows-amd64.zip" -OutFile "dolt.zip"
+      
+      Write-Host "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') Extracting dolt"
+      Expand-Archive -Path "dolt.zip" -DestinationPath "dolt"
+      
+      $doltPath = Join-Path $(Get-Location) "dolt"
+      $env:PATH += ";$doltPath"
+      
+      Write-Host "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') Checking if dolt is in the path"
+      $ret = Start-Process -FilePath "dolt" -ArgumentList 'version' -NoNewWindow -Wait -PassThru
+      Write-Host "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') Dolt check terminated with code $($ret.ExitCode)"
       exit($ret.ExitCode)
       
 - task: DotNetCoreCLI@2
@@ -46,7 +53,7 @@ steps:
   inputs:
     command: test
     projects: 'test/**/*.csproj'
-    arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+    arguments: '--configuration $(buildConfiguration) --collect "Code coverage" -p:ParallelizeTestCollections=true'
 
 - task: DotNetCoreCLI@2
   displayName: 'push to project feed'
