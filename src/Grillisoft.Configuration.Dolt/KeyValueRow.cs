@@ -1,9 +1,9 @@
-﻿namespace Grillisoft.Configuration.Dolt
+﻿namespace Grillisoft.Configuration
 {
-    public class KeyValueRow
+    internal class KeyValueRow
     {
-        public string Key;
+        public string Key { get; set; }
 
-        public string Value;
+        public string Value { get; set; }
     }
 }

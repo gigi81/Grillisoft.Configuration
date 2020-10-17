@@ -1,19 +1,15 @@
-﻿using CsvHelper.Configuration;
-using Grillisoft.Configuration.Dolt;
-using Microsoft.Extensions.Configuration;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using Microsoft.Extensions.Configuration;
 
 namespace Grillisoft.Configuration
 {
-    internal class DoltConfigurationProvider : ConfigurationProvider
+    public class DoltTreeConfigurationProvider : ConfigurationProvider
     {
-        private const string ParentKey = ".parent";
-
-        public DoltConfigurationProvider(DoltConfigurationSource source)
+        public DoltTreeConfigurationProvider(DoltTreeConfigurationSource source)
         {
             this.Source = source;
         }
@@ -21,7 +17,7 @@ namespace Grillisoft.Configuration
         /// <summary>
         /// The source settings for this provider.
         /// </summary>
-        public DoltConfigurationSource Source { get; }
+        public DoltTreeConfigurationSource Source { get; }
 
         public override void Load()
         {
@@ -87,12 +83,10 @@ namespace Grillisoft.Configuration
             throw new Exception($"Could not find any table named {String.Join(" or ", this.Source.Keys)} in dolt repo {this.Source.Url}");
         }
 
-        private static readonly ClassMap DefaultClassMap = new KeyValueRowMap();
-
         private IDictionary<string, string> LoadInternal(DoltRunner runner, string table, out string parentKey)
         {
-            var ret = runner.Export<KeyValueRow>(table, DefaultClassMap).ToDictionary(r => r.Key, r => r.Value);
-            ret.TryGetValue(ParentKey, out parentKey);
+            var ret = runner.Export<KeyValueRow>(table, new KeyValueRowMap(this.Source.KeyField, this.Source.ValueField)).ToDictionary(r => r.Key, r => r.Value);
+            ret.TryGetValue(this.Source.ParentKey, out parentKey);
             return ret;
         }
     }

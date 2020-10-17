@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.FileProviders;
-using Grillisoft.Configuration.Dolt;
 
 namespace Grillisoft.Configuration
 {
-    public static class DoltConfigurationExtensions
+    public static class DoltTreeConfigurationExtensions
     {
         public static IConfigurationBuilder AddDoltTree(this IConfigurationBuilder builder, string url, IEnumerable<string> keys)
         {
@@ -26,7 +24,7 @@ namespace Grillisoft.Configuration
             });
         }
 
-        public static IConfigurationBuilder AddDoltTree(this IConfigurationBuilder builder, Action<DoltConfigurationSource> configureSource)
+        public static IConfigurationBuilder AddDoltTree(this IConfigurationBuilder builder, Action<DoltTreeConfigurationSource> configureSource)
             => builder.Add(configureSource);
     }
 }

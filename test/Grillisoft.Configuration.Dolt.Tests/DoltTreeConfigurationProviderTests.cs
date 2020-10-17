@@ -1,9 +1,10 @@
-using Microsoft.Extensions.Configuration;
 using Xunit;
+using Microsoft.Extensions.Configuration;
+using Grillisoft.Configuration;
 
-namespace Grillisoft.Configuration.Dolt.Tests
+namespace Grillisoft.Configuration.Tests
 {
-    public class DoltConfigurationProviderTests
+    public class DoltTreeConfigurationProviderTests
     {
         [Fact]
         public void LoadUat()

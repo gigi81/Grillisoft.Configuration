@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace Grillisoft.Configuration.Dolt
+namespace Grillisoft.Configuration
 {
-    public class DoltTable
+    internal class DoltTable
     {
         private static readonly Regex TableInfoRegEx = new Regex(@"([\w]+)[\t\s]+([\w]+)[\t\s]+([\d]+)", RegexOptions.Compiled);
 

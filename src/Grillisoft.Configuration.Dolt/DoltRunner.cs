@@ -7,9 +7,9 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 
-namespace Grillisoft.Configuration.Dolt
+namespace Grillisoft.Configuration
 {
-    public class DoltRunner
+    internal class DoltRunner
     {
         private readonly string _executable;
         private readonly string _workFolder;

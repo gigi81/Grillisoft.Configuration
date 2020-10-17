@@ -1,13 +1,13 @@
 ﻿using CsvHelper.Configuration;
 
-namespace Grillisoft.Configuration.Dolt
+namespace Grillisoft.Configuration
 {
-    public class KeyValueRowMap : ClassMap<KeyValueRow>
+    internal class KeyValueRowMap : ClassMap<KeyValueRow>
     {
-        public KeyValueRowMap()
+        public KeyValueRowMap(string keyField, string valueField)
         {
-            Map(m => m.Key).Name("key");
-            Map(m => m.Value).Name("value");
+            Map(m => m.Key).Name(keyField);
+            Map(m => m.Value).Name(valueField);
         }
     }
 }
