@@ -17,11 +17,12 @@ steps:
     errorActionPreference: stop
     script: |
       Write-Host "Downloading dolt"
-      $client = new-object System.Net.WebClient
-      $client.DownloadFile("https://github.com/dolthub/dolt/releases/download/v0.21.0/dolt-windows-amd64.msi","dolt.msi")
+      Invoke-WebRequest -Uri "https://github.com/dolthub/dolt/releases/download/v0.21.0/dolt-windows-amd64.msi" -OutFile "dolt.msi"
       Write-Host "Installing dolt"
-      msiexec.exe /i dolt.msi /quiet
-
+      $ret = Start-Process -FilePath "msiexec" -ArgumentList '/i','dolt.msi','/quiet' -NoNewWindow -Wait -PassThru
+      Write-Host "Dolt install terminated with code $($ret.ExitCode)"
+      exit($ret.ExitCode)
+      
 - task: DotNetCoreCLI@2
   displayName: restore
   inputs:
