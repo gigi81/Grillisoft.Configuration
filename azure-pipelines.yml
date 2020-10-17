@@ -26,7 +26,7 @@ steps:
       Write-Host "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') Extracting dolt"
       Expand-Archive -Path $doltZip -DestinationPath $doltPath
       
-      $doltPath = Join-Path $doltPath 'test'
+      $doltPath = Join-Path $doltPath 'dolt-windows-amd64'
       $env:PATH += ";$doltPath"
       Write-Host "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') Paht set to $($env:PATH)"
       
