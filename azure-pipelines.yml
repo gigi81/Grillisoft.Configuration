@@ -16,14 +16,17 @@ steps:
     failOnStderr: true
     errorActionPreference: stop
     script: |
+      $doltPath = Join-Path (Get-Location) "dolt"
+      $doltZip = Join-Path (Get-Location) "dolt.zip"
+      
       Write-Host "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') Downloading dolt"
       $client = new-object System.Net.WebClient
-      $client.DownloadFile("https://github.com/dolthub/dolt/releases/download/v0.21.0/dolt-windows-amd64.zip", "dolt.zip")
+      $client.DownloadFile("https://github.com/dolthub/dolt/releases/download/v0.21.0/dolt-windows-amd64.zip", $doltZip)
       
       Write-Host "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') Extracting dolt"
-      Expand-Archive -Path "dolt.zip" -DestinationPath "dolt"
+      Expand-Archive -Path $doltZip -DestinationPath $doltPath
       
-      $doltPath = Join-Path (Get-Location) "dolt"
+      $doltPath = Join-Path $doltPath 'test'
       $env:PATH += ";$doltPath"
       Write-Host "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') Paht set to $($env:PATH)"
       
