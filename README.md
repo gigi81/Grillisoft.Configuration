@@ -79,6 +79,7 @@ INSERT INTO prod VALUES('env', 'prod');
 
 CREATE TABLE dev (`key` VARCHAR(128), `value` VARCHAR(1024), PRIMARY KEY(`key`));
 INSERT INTO dev VALUES('.parent', 'uat');
+INSERT INTO dev VALUES('env', 'dev');
 INSERT INTO dev VALUES('sqlserverhost', 'localhost');
 ```
 

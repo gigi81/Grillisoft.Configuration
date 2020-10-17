@@ -1,4 +1,5 @@
 ﻿using CsvHelper;
+using CsvHelper.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -23,7 +24,7 @@ namespace Grillisoft.Configuration.Dolt
             _error = error;
         }
 
-        public DoltRunner Clone(string repo)
+        public DoltRunner Clone(string repo, string branch = null)
         {
             if (String.IsNullOrEmpty(repo))
                 throw new ArgumentNullException(nameof(repo));
@@ -32,7 +33,10 @@ namespace Grillisoft.Configuration.Dolt
             if (index <= 0 || index >= repo.Length - 1)
                 throw new ArgumentException($"Invalid dolt repo name {repo}", nameof(repo));
 
-            this.RunOrThrow("clone", repo);
+            if (String.IsNullOrEmpty(branch))
+                this.RunOrThrow("clone", repo);
+            else
+                this.RunOrThrow("clone", repo, "-b", branch);
 
             return new DoltRunner(Path.Combine(_workFolder, repo.Substring(index + 1)), _output, _error);
         }
@@ -52,19 +56,27 @@ namespace Grillisoft.Configuration.Dolt
             return ret;
         }
 
-        public IDictionary<string, string> Export(string table)
+        public IList<T> Export<T>(string table, ClassMap map = null)
         {
             var path = Path.GetTempFileName();
 
             try
             {
-                this.RunOrThrow("table", "export", table, path);
+                this.RunOrThrow("table", "export", "-f", "-file-type", "csv", table, path);
 
                 using (var reader = new StreamReader(path))
                 using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
                 {
-                    return csv.GetRecords<KeyValueRow>().ToDictionary(r => r.Key, r => r.Value);
+                    if(map != null)
+                        csv.Configuration.RegisterClassMap(map);
+
+                    return csv.GetRecords<T>().ToList();
                 }
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                throw;
             }
             finally
             {
