@@ -9,6 +9,14 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+- task: PowerShell@2
+  displayName: install dolt
+  inputs:
+    script: |
+      $client = new-object System.Net.WebClient
+      $client.DownloadFile("https://github.com/dolthub/dolt/releases/download/v0.21.0/dolt-windows-amd64.msi","dolt.msi")
+      msiexec.exe /i dolt.msi /quiet
+
 - task: DotNetCoreCLI@2
   displayName: restore
   inputs:
