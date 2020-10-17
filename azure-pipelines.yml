@@ -13,9 +13,13 @@ steps:
   displayName: install dolt
   inputs:
     targetType: inline
+    failOnStderr: true
+    errorActionPreference: stop
     script: |
+      Write-Host "Downloading dolt"
       $client = new-object System.Net.WebClient
       $client.DownloadFile("https://github.com/dolthub/dolt/releases/download/v0.21.0/dolt-windows-amd64.msi","dolt.msi")
+      Write-Host "Installing dolt"
       msiexec.exe /i dolt.msi /quiet
 
 - task: DotNetCoreCLI@2
