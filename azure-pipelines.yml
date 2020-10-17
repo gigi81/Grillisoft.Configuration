@@ -29,6 +29,7 @@ steps:
       $doltPath = Join-Path $doltPath 'dolt-windows-amd64'
       $doltPath = Join-Path $doltPath 'bin'
       $env:PATH += ";$doltPath"
+      Write-Host "##vso[task.setvariable variable=PATH]$($env:PATH)"
       Write-Host "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') Paht set to $($env:PATH)"
       
       Write-Host "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') Checking if dolt is in the path"
