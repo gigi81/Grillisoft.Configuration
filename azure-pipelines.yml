@@ -17,8 +17,8 @@ steps:
     errorActionPreference: stop
     script: |
       Write-Host "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') Downloading dolt"
-      Import-Module BitsTransfer
-      Start-BitsTransfer -Source "https://github.com/dolthub/dolt/releases/download/v0.21.0/dolt-windows-amd64.zip" -Destination "dolt.zip"
+      $client = new-object System.Net.WebClient
+      $client.DownloadFile("https://github.com/dolthub/dolt/releases/download/v0.21.0/dolt-windows-amd64.zip", "dolt.zip")
       
       Write-Host "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') Extracting dolt"
       Expand-Archive -Path "dolt.zip" -DestinationPath "dolt"
