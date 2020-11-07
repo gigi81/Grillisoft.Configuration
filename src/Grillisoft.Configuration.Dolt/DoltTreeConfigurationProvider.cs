@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 
 namespace Grillisoft.Configuration
@@ -44,12 +45,17 @@ namespace Grillisoft.Configuration
             }
             finally
             {
-                if (tempFolder.Exists)
-                    RunWithRetry(() => tempFolder.Delete(recursive: true), 500);
+                Task.Run(() => {
+                    RunWithRetry(() =>
+                    {
+                        if (tempFolder.Exists)
+                            tempFolder.Delete(recursive: true);
+                    }, 700);
+                });
             }
         }
 
-        private void RunWithRetry(Action action, int sleep, int maxRetries = 10)
+        private void RunWithRetry(Action action, int sleep, int maxRetries = 10, bool throwException = false)
         {
             var retries = 0;
 
@@ -63,7 +69,7 @@ namespace Grillisoft.Configuration
                 catch(Exception)
                 {
                     retries++;
-                    if (retries >= maxRetries)
+                    if (retries >= maxRetries && throwException)
                         throw;
 
                     Thread.Sleep(sleep);
