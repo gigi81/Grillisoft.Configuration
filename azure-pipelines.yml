@@ -71,10 +71,10 @@ steps:
     includesource: true
     publishVstsFeed: 'Grillisoft.Configuration/configuration'
 
-#  - task: NuGetCommand@2
-#    displayName: 'NuGet push nuget.org feed'
-#    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/stable'))
-#    inputs:
-#      command: push
-#      nuGetFeedType: external
-#      publishFeedCredentials: nuget.org
+- task: NuGetCommand@2
+  displayName: 'NuGet push nuget.org feed'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/stable'))
+  inputs:
+    command: push
+    nuGetFeedType: external
+    publishFeedCredentials: nuget.org
