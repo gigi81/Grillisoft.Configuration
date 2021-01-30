@@ -45,7 +45,8 @@ Now when requesting the setting for "sqlserverhost", here is the outcome for the
 - dev: localhost
 
 ```csharp
-using Grillisoft.Configuration
+//install nuget package Grillisoft.Configuration.Json
+using Microsoft.Extensions.Configuration;
 
 var configuration = new ConfigurationBuilder()
     .AddJsonTree(new[] { Environment.MachineName, Environment.GetEnvironmentVariable("ENVIRONMENT") })
@@ -56,6 +57,9 @@ Console.WriteLine(configuration["sqlserverhost"]);
 ```
 
 ## Example usage DOLT
+As in the words of dolt creators, "[Dolt](https://www.dolthub.com/) is the true Git for data experience in a SQL database, providing version control for schema and cell-wise for data, all optimized for collaboration."
+I like the idea behind dolt so I decided to support it in this library.
+Below an example step by step on how to use it. Setup and initial configuration of dolt excluded.
 
 ```bash
 dolt sql
@@ -83,4 +87,16 @@ dolt add prod
 dolt add dev
 dolt commit -m "Initial commit"
 dolt push --set-upstream origin master
+```
+
+```csharp
+//install nuget package Grillisoft.Configuration.Dolt
+using Microsoft.Extensions.Configuration;
+
+var configuration = new ConfigurationBuilder()
+	.AddDoltTree("gigi81/test-configuration", new[] { "dev" })
+	.AddRegExParser()
+	.Build();
+
+Console.WriteLine(configuration["sqlserverhost"]);
 ```
