@@ -16,11 +16,9 @@ The combination of these two features is very powerfull and, for example, it can
 On uat.json settings file you have these key/value pairs:
 ```json
 {
-  "keys": {
-    "env": "uat",
-    "sqlserverhost": "sql-${env}.contoso.com",
-    "mailhost": "mail-${env}.contoso.com"
-  }
+  "env": "uat",
+  "sqlserverhost": "sql-${env}.contoso.com",
+  "mailhost": "mail-${env}.contoso.com"
 }
 ```
 
@@ -28,9 +26,7 @@ On prod.json file:
 ```json
 {
   "parent": "uat",
-  "keys": {
-    "env": "prod"
-  }
+  "env": "prod"
 }
 ```
 
@@ -38,10 +34,8 @@ On dev.json file:
 ```json
 {
   "parent": "uat",
-  "keys": {
-    "env": "dev",
-    "sqlserverhost": "localhost"
-  }
+  "env": "dev",
+  "sqlserverhost": "localhost"
 }
 ```
 

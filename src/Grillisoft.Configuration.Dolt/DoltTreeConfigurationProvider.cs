@@ -32,11 +32,11 @@ namespace Grillisoft.Configuration
                 var tables = runner.ListTables().Select(t => t.Name).ToList();
                 var table = GetExistingTable(tables);
 
-                Data = LoadInternal(runner, table, out var parentKey);
+                Data = LoadInternal(runner, table, out var parent);
 
-                while (!String.IsNullOrEmpty(parentKey))
+                while (!String.IsNullOrEmpty(parent))
                 {
-                    foreach (var pair in LoadInternal(runner, parentKey, out parentKey))
+                    foreach (var pair in LoadInternal(runner, parent, out parent))
                     {
                         if (!Data.ContainsKey(pair.Key))
                             Data.Add(pair);
@@ -89,10 +89,10 @@ namespace Grillisoft.Configuration
             throw new Exception($"Could not find any table named {String.Join(" or ", this.Source.Keys)} in dolt repo {this.Source.Url}");
         }
 
-        private IDictionary<string, string> LoadInternal(DoltRunner runner, string table, out string parentKey)
+        private IDictionary<string, string> LoadInternal(DoltRunner runner, string table, out string parent)
         {
             var ret = runner.Export<KeyValueRow>(table, new KeyValueRowMap(this.Source.KeyField, this.Source.ValueField)).ToDictionary(r => r.Key, r => r.Value);
-            ret.TryGetValue(this.Source.ParentKey, out parentKey);
+            ret.TryGetValue(this.Source.ParentKey, out parent);
             return ret;
         }
     }

@@ -94,9 +94,7 @@ namespace Grillisoft.Configuration
 
         public virtual int Run(params string[] args)
         {
-            var process = CreateProcess(args);
-            RunProcess(process);
-            return process.ExitCode;
+            return RunProcess(CreateProcess(args)).ExitCode;
         }
 
         protected virtual Process CreateProcess(string[] args)
@@ -124,12 +122,13 @@ namespace Grillisoft.Configuration
             return String.Join(" ", args.Select(a => a.Contains(' ') ? $"\"{a}\"" : a));
         }
 
-        protected virtual void RunProcess(Process process)
+        protected virtual Process RunProcess(Process process)
         {
             process.Start();
             process.BeginOutputReadLine();
             process.BeginErrorReadLine();
             process.WaitForExit();
+            return process;
         }
 
         private void Process_OutputDataReceived(object sender, DataReceivedEventArgs e)

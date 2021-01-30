@@ -10,6 +10,11 @@ namespace Grillisoft.Configuration.Json
         public override string Extension => "json";
 
         /// <summary>
+        /// Name of the key in the table to be used to identify the parent for the current table (default "parent")
+        /// </summary>
+        public string ParentKey { get; set; } = "parent";
+
+        /// <summary>
         /// Builds the <see cref="JsonTreeConfigurationProvider"/> for this source.
         /// </summary>
         /// <param name="builder">The <see cref="IConfigurationBuilder"/>.</param>

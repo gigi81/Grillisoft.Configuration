@@ -1,6 +1,4 @@
 {
   "parent": "root",
-  "keys": {
-    "key01": "example value override"
-  }
+  "key01": "example value override"
 }

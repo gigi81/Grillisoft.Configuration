@@ -5,19 +5,19 @@ using System.Xml;
 
 namespace Grillisoft.Configuration.Xml
 {
-    public class XmlTreeConfigurationProvider : FileTreeConfigurationProvider
+    public class XmlTreeConfigurationProvider : FileTreeConfigurationProvider<XmlTreeConfigurationSource>
     {
         public XmlTreeConfigurationProvider(XmlTreeConfigurationSource source) : base(source) {}
 
-        public override IDictionary<string, string> Load(Stream stream, out string parentKey)
+        public override IDictionary<string, string> Load(Stream stream, out string parent)
         {
             using (var reader = XmlReader.Create(stream, Settings))
             {
-                return LoadKeys(reader, out parentKey);
+                return LoadKeys(reader, out parent);
             }
         }
 
-        private static IDictionary<string, string> LoadKeys(XmlReader reader, out string parentKey)
+        private static IDictionary<string, string> LoadKeys(XmlReader reader, out string parent)
         {
             while (reader.Read())
             {
@@ -27,7 +27,7 @@ namespace Grillisoft.Configuration.Xml
                         if (!reader.Name.Equals("keys", StringComparison.InvariantCultureIgnoreCase))
                             break;
 
-                        parentKey = reader.GetAttribute("parent");
+                        parent = reader.GetAttribute("parent");
                         return LoadKeysSubTree(reader.ReadSubtree());
                 }
             }

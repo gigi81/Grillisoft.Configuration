@@ -1,8 +1,6 @@
 {
-  "keys": {
-    "key01": "example value",
-    "key02": "example value",
-    "key03": "example value",
-    "key04": "example value"
-  }
+  "key01": "example value",
+  "key02": "example value",
+  "key03": "example value",
+  "key04": "example value"
 }

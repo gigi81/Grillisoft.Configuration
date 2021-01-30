@@ -18,7 +18,7 @@ namespace Grillisoft.Configuration
     /// <summary>
     /// Base class for file based <see cref="ConfigurationProvider"/>.
     /// </summary>
-    public abstract class FileTreeConfigurationProvider : ConfigurationProvider, IDisposable
+    public abstract class FileTreeConfigurationProvider<TConfigurationSource> : ConfigurationProvider, IDisposable where TConfigurationSource : FileTreeConfigurationSource
     {
         private readonly IDisposable _changeTokenRegistration;
 
@@ -26,7 +26,7 @@ namespace Grillisoft.Configuration
         /// Initializes a new instance with the specified source.
         /// </summary>
         /// <param name="source">The source settings.</param>
-        public FileTreeConfigurationProvider(FileTreeConfigurationSource source)
+        public FileTreeConfigurationProvider(TConfigurationSource source)
         {
             Source = source ?? throw new ArgumentNullException(nameof(source));
 
@@ -44,7 +44,7 @@ namespace Grillisoft.Configuration
         /// <summary>
         /// The source settings for this provider.
         /// </summary>
-        public FileTreeConfigurationSource Source { get; }
+        public TConfigurationSource Source { get; }
 
         private void Load(bool reload)
         {
@@ -100,9 +100,9 @@ namespace Grillisoft.Configuration
             OnReload();
         }
 
-        private IDictionary<string, string> LoadInternal(IFileInfo file, out string parentKey)
+        private IDictionary<string, string> LoadInternal(IFileInfo file, out string parent)
         {
-            parentKey = null;
+            parent = null;
 
             static Stream OpenRead(IFileInfo fileInfo)
             {
@@ -127,7 +127,7 @@ namespace Grillisoft.Configuration
             {
                 try
                 {
-                    return Load(stream, out parentKey);
+                    return Load(stream, out parent);
                 }
                 catch (Exception e)
                 {
@@ -152,7 +152,8 @@ namespace Grillisoft.Configuration
         /// Loads this provider's data from a stream.
         /// </summary>
         /// <param name="stream">The stream to read.</param>
-        public abstract IDictionary<string, string> Load(Stream stream, out string parentKey);
+        /// <param name="parent">Name of the parent to load</param>
+        public abstract IDictionary<string, string> Load(Stream stream, out string parent);
 
         private void HandleException(ExceptionDispatchInfo info)
         {

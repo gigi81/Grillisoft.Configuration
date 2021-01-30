@@ -3,6 +3,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using Microsoft.Extensions.Configuration;
 using System;
 
 namespace Grillisoft.Configuration
@@ -13,9 +14,9 @@ namespace Grillisoft.Configuration
     public class FileTreeLoadExceptionContext
     {
         /// <summary>
-        /// The <see cref="FileConfigurationProvider"/> that caused the exception.
+        /// The <see cref="ConfigurationProvider"/> that caused the exception.
         /// </summary>
-        public FileTreeConfigurationProvider Provider { get; set; }
+        public ConfigurationProvider Provider { get; set; }
 
         /// <summary>
         /// The exception that occurred in Load.

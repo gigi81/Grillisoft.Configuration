@@ -1,6 +1,5 @@
 using Xunit;
 using Microsoft.Extensions.Configuration;
-using Grillisoft.Configuration;
 
 namespace Grillisoft.Configuration.Tests
 {
