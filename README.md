@@ -1,3 +1,7 @@
+[![Build Status](https://luigigrilli.visualstudio.com/Grillisoft.Configuration/_apis/build/status/gigi81.Grillisoft.Configuration?branchName=stable)](https://luigigrilli.visualstudio.com/Grillisoft.Configuration/_build/latest?definitionId=14&branchName=stable)
+![Nuget](https://img.shields.io/nuget/v/Grillisoft.Configuration.Abstractions)
+
+
 # Grillisoft.Configuration
 
 A collection of packages to add 2 features to the Microsoft.Extensions.Configuration configuration system for dotnet:
@@ -9,6 +13,13 @@ Create a settings tree where child can override settings of their parent. This i
 
 ## Parsing
 Parsing allows to compose strings depending on other settings keys. It can be used with any configuration source, with, without or in combination with a File Tree
+
+## Install Packages
+```bash
+dotnet add package Grillisoft.Configuration.Xml
+dotnet add package Grillisoft.Configuration.Json
+dotnet add package Grillisoft.Configuration.RegExParser
+```
 
 ## Example usage JSON
 The combination of these two features is very powerfull and, for example, it can greatly simplify managament of environment settings.
